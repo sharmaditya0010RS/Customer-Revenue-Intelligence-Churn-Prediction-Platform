@@ -273,3 +273,112 @@ SELECT
     END AS revenue_band
 
 FROM analytics.customers AS c;
+
+/* ============================================================
+   VIEW 6
+   CUSTOMER RISK 360
+   ML predictions + customer attributes
+   ============================================================ */
+
+DROP VIEW IF EXISTS analytics.vw_customer_risk_360 CASCADE;
+
+
+CREATE VIEW analytics.vw_customer_risk_360 AS
+
+SELECT
+
+    c.customer_id,
+
+    c.gender,
+    c.senior_citizen,
+    c.partner,
+    c.dependents,
+
+    c.tenure,
+    c.tenure_group,
+
+    c.contract,
+    c.internet_service,
+    c.payment_method,
+
+    c.monthly_charges,
+    c.total_charges,
+    c.service_count,
+
+    c.churn AS actual_churn_label,
+    c.churn_flag AS actual_churn,
+
+    p.churn_probability,
+    p.predicted_churn,
+
+    p.risk_segment,
+    p.retention_priority,
+
+    p.expected_monthly_revenue_at_risk,
+
+    CASE
+
+        WHEN p.predicted_churn = 1
+             AND c.churn_flag = 1
+            THEN 'True Positive'
+
+        WHEN p.predicted_churn = 1
+             AND c.churn_flag = 0
+            THEN 'False Positive'
+
+        WHEN p.predicted_churn = 0
+             AND c.churn_flag = 1
+            THEN 'False Negative'
+
+        ELSE 'True Negative'
+
+    END AS prediction_outcome
+
+FROM analytics.customers AS c
+
+INNER JOIN analytics.customer_predictions AS p
+    ON c.customer_id = p.customer_id;
+
+
+/* ============================================================
+   VIEW 7
+   RETENTION COMMAND CENTER
+   ============================================================ */
+
+DROP VIEW IF EXISTS analytics.vw_retention_command_center CASCADE;
+
+
+CREATE VIEW analytics.vw_retention_command_center AS
+
+SELECT
+
+    risk_segment,
+    retention_priority,
+
+    COUNT(*) AS customers,
+
+    SUM(predicted_churn)
+        AS predicted_churn_customers,
+
+    ROUND(
+        AVG(churn_probability::numeric) * 100,
+        2
+    ) AS avg_churn_probability_pct,
+
+    ROUND(
+        SUM(monthly_charges::numeric),
+        2
+    ) AS monthly_revenue,
+
+    ROUND(
+        SUM(
+            expected_monthly_revenue_at_risk::numeric
+        ),
+        2
+    ) AS expected_monthly_revenue_at_risk
+
+FROM analytics.vw_customer_risk_360
+
+GROUP BY
+    risk_segment,
+    retention_priority;

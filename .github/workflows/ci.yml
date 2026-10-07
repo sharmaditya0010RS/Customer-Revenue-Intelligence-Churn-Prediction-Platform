@@ -1,0 +1,98 @@
+name: Customer Intelligence CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+  workflow_dispatch:
+
+jobs:
+  quality-gate:
+    name: Python Quality Gate
+    runs-on: ubuntu-latest
+
+    env:
+      PYTHONPATH: .
+      DB_HOST: localhost
+      DB_PORT: "5432"
+      DB_NAME: customer_intelligence
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+
+    services:
+      postgres:
+        image: postgres:16
+
+        env:
+          POSTGRES_DB: customer_intelligence
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
+        ports:
+          - 5432:5432
+
+        options: >-
+          --health-cmd "pg_isready -U postgres -d customer_intelligence"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate Python imports
+        run: |
+          python -m compileall src app tests
+
+      - name: Initialize database schema
+        run: |
+          python -m src.load_database
+
+      - name: Build analytics views
+        run: |
+          python -m src.run_sql
+
+      - name: Initialize live platform
+        run: |
+          psql -h localhost -U postgres -d customer_intelligence -f database/04_live_platform.sql
+        env:
+          PGPASSWORD: postgres
+
+      - name: Generate production predictions
+        run: |
+          python -m src.predict
+
+      - name: Rebuild analytics views after predictions
+        run: |
+          python -m src.run_sql
+
+      - name: Run automated test suite
+        run: |
+          pytest -v
+
+      - name: Validate production model explainability
+        run: |
+          python -m src.explainability
+
+      - name: Validate production monitoring
+        run: |
+          python -m src.monitoring

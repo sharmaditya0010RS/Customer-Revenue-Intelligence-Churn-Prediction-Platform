@@ -84,6 +84,8 @@ def validate_views() -> None:
         "vw_revenue_analysis",
         "vw_customer_segments",
         "vw_customer_360",
+        "vw_customer_risk_360",
+        "vw_retention_command_center",
     }
 
     missing = required_views - set(views)

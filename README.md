@@ -67,7 +67,7 @@ It creates a complete **Customer Revenue Intelligence Platform** connecting anal
 
 ```text
                         ┌─────────────────────────────┐
-                        │ IBM Telco Customer Dataset │
+                        │ IBM Telco Customer Dataset  │
                         └──────────────┬──────────────┘
                                        │
                                        ▼
@@ -89,8 +89,8 @@ It creates a complete **Customer Revenue Intelligence Platform** connecting anal
              │ SQL Views  │     │ Python EDA  │    │ ML Pipeline │
              │ & KPIs     │     │ & Statistics│    │ XGBoost     │
              └─────┬──────┘     └─────────────┘    └──────┬──────┘
-                   │                                       │
-                   │                                       ▼
+                   │                                      │
+                   │                                      ▼
                    │                              ┌──────────────────┐
                    │                              │ Saved Production │
                    │                              │ Model Artifact   │
@@ -106,8 +106,8 @@ It creates a complete **Customer Revenue Intelligence Platform** connecting anal
                                       │
                                       ▼
                            ┌───────────────────────┐
-                           │ PostgreSQL Analytics │
-                           │ + Prediction Views   │
+                           │ PostgreSQL Analytics  │
+                           │ + Prediction Views    │
                            └───────────┬───────────┘
                                        │
                     ┌──────────────────┼───────────────────┐
@@ -1294,8 +1294,7 @@ Deployment                   DONE
 
 ## Author
 
-Aditya Sharma
+**Aditya Sharma**
 
-**Aditya**
 
 Portfolio Project — Data Analytics | Business Intelligence | Machine Learning Engineering

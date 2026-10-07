@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environment
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Models
+models/*.joblib
+models/*.pkl
+
+# Generated datasets
+data/processed/*
+data/predictions/*
+
+# Reports
+reports/figures/*
+reports/metrics/*
+
+# Streamlit secrets
+.streamlit/secrets.toml

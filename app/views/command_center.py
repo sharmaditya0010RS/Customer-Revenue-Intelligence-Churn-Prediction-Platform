@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import streamlit as st
 
 from app.components.charts import (
@@ -24,9 +26,61 @@ from app.components.status import (
     engine_status,
     format_timestamp,
 )
+from src.config import BASE_DIR
 from src.engine_controller import (
     generate_one_customer,
 )
+
+
+POWERBI_DASHBOARD_PATH = (
+    Path(BASE_DIR)
+    / "powerbi"
+    / "dashboard.pbix"
+)
+
+
+def render_powerbi_download() -> None:
+    """Render the Power BI dashboard download action."""
+
+    st.write("")
+
+    st.markdown(
+        "**Power BI Dashboard**"
+    )
+
+    st.caption(
+        (
+            "Download the complete Power BI report "
+            "for offline analysis in Power BI Desktop."
+        )
+    )
+
+    if not POWERBI_DASHBOARD_PATH.exists():
+
+        st.warning(
+            (
+                "Power BI dashboard file is not "
+                "available in this deployment."
+            )
+        )
+
+        return
+
+    with POWERBI_DASHBOARD_PATH.open(
+        "rb"
+    ) as dashboard_file:
+
+        dashboard_bytes = (
+            dashboard_file.read()
+        )
+
+    st.download_button(
+        label="Download Power BI Dashboard",
+        data=dashboard_bytes,
+        file_name="customer_intelligence_dashboard.pbix",
+        mime="application/octet-stream",
+        use_container_width=True,
+    )
 
 
 def render() -> None:
@@ -147,10 +201,10 @@ def render() -> None:
     with right:
 
         section_header(
-            "Quick Action",
+            "Quick Actions",
             (
-                "Generate and score one permanent "
-                "customer without starting the stream."
+                "Generate a scored customer or download "
+                "the Power BI executive dashboard."
             ),
         )
 
@@ -163,6 +217,18 @@ def render() -> None:
             len(generated),
         )
 
+        st.markdown(
+            "**Customer Generation**"
+        )
+
+        st.caption(
+            (
+                "Generate and score one permanent "
+                "customer without starting the "
+                "continuous generation engine."
+            )
+        )
+
         if st.button(
             "Generate One Customer",
             type="primary",
@@ -173,7 +239,10 @@ def render() -> None:
         ):
 
             with st.spinner(
-                "Generating, scoring and persisting customer..."
+                (
+                    "Generating, scoring and "
+                    "persisting customer..."
+                )
             ):
 
                 result = (
@@ -194,9 +263,15 @@ def render() -> None:
         if state["is_running"]:
 
             st.caption(
-                "Generate One is disabled while "
-                "the continuous engine is running."
+                (
+                    "Generate One is disabled while "
+                    "the continuous engine is running."
+                )
             )
+
+        st.divider()
+
+        render_powerbi_download()
 
     st.divider()
 

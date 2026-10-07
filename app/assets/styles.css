@@ -1,306 +1,1559 @@
 /* ============================================================
    CUSTOMER REVENUE INTELLIGENCE
-   PREMIUM STREAMLIT DESIGN SYSTEM
+   FUTURISTIC ENTERPRISE AI DESIGN SYSTEM
+
+   Palette:
+   Midnight Navy  -> platform foundation
+   Electric Cyan  -> intelligence / live systems
+   Indigo         -> analytics / ML
+   Violet         -> secondary intelligence accent
+   Emerald        -> healthy / operational
+   Amber / Rose   -> warning / risk
    ============================================================ */
 
 
-/* ---------- Application ---------- */
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+    --bg-deep: #030712;
+    --bg-app: #050b16;
+    --bg-sidebar: #07101d;
+
+    --surface-1: #091423;
+    --surface-2: #0d1a2b;
+    --surface-3: #112238;
+    --surface-hover: #152a43;
+
+    --border-subtle: rgba(125, 211, 252, 0.09);
+    --border-default: rgba(148, 163, 184, 0.15);
+    --border-strong: rgba(125, 211, 252, 0.24);
+
+    --text-primary: #f4f8ff;
+    --text-secondary: #b7c5d9;
+    --text-muted: #7f93ad;
+    --text-faint: #5d718d;
+
+    --cyan: #22d3ee;
+    --cyan-bright: #67e8f9;
+    --cyan-soft: rgba(34, 211, 238, 0.11);
+
+    --blue: #3b82f6;
+    --blue-bright: #60a5fa;
+    --blue-soft: rgba(59, 130, 246, 0.13);
+
+    --indigo: #6366f1;
+    --indigo-bright: #818cf8;
+    --indigo-soft: rgba(99, 102, 241, 0.12);
+
+    --violet: #8b5cf6;
+    --violet-bright: #a78bfa;
+    --violet-soft: rgba(139, 92, 246, 0.10);
+
+    --emerald: #34d399;
+    --amber: #fbbf24;
+    --rose: #fb7185;
+
+    --radius-sm: 7px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+
+    --shadow-card:
+        0 1px 2px rgba(0, 0, 0, 0.25),
+        0 12px 30px rgba(0, 0, 0, 0.16);
+
+    --shadow-hover:
+        0 16px 42px rgba(0, 0, 0, 0.23);
+
+    --transition-fast: 150ms ease;
+    --transition-normal: 220ms ease;
+}
+
+
+/* ============================================================
+   APPLICATION FOUNDATION
+   ============================================================ */
+
+html,
+body,
+[data-testid="stAppViewContainer"],
+.stApp {
+    background:
+        var(--bg-app);
+
+    color:
+        var(--text-primary);
+}
+
 
 .stApp {
     background:
         radial-gradient(
-            circle at 15% 0%,
-            rgba(59, 130, 246, 0.08),
-            transparent 30%
+            circle at 8% -5%,
+            rgba(34, 211, 238, 0.10),
+            transparent 26rem
         ),
         radial-gradient(
-            circle at 90% 10%,
-            rgba(139, 92, 246, 0.06),
-            transparent 28%
+            circle at 88% 0%,
+            rgba(99, 102, 241, 0.10),
+            transparent 31rem
         ),
-        #07111f;
-    color: #e5edf8;
+        radial-gradient(
+            circle at 55% 105%,
+            rgba(139, 92, 246, 0.055),
+            transparent 35rem
+        ),
+        linear-gradient(
+            135deg,
+            #06101d 0%,
+            #050b16 45%,
+            #07091a 100%
+        );
 }
 
 
-/* ---------- Main container ---------- */
+/* Very subtle futuristic grid */
+
+[data-testid="stAppViewContainer"]::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    opacity: 0.16;
+
+    background-image:
+        linear-gradient(
+            rgba(125, 211, 252, 0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(125, 211, 252, 0.025) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        48px 48px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.8),
+            transparent 85%
+        );
+}
+
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
 
 .block-container {
-    max-width: 1500px;
-    padding-top: 1.6rem;
-    padding-bottom: 4rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    position: relative;
+
+    z-index: 1;
+
+    max-width: 1540px;
+
+    padding-top: 1.75rem;
+    padding-bottom: 4.5rem;
+    padding-left: 2.25rem;
+    padding-right: 2.25rem;
 }
 
 
-/* ---------- Streamlit header ---------- */
+div[data-testid="stVerticalBlock"] {
+    gap: 0.8rem;
+}
+
+
+/* ============================================================
+   STREAMLIT HEADER
+   ============================================================ */
 
 header[data-testid="stHeader"] {
-    background: rgba(7, 17, 31, 0.72);
-    backdrop-filter: blur(16px);
+    background:
+        rgba(3, 9, 19, 0.76);
+
+    border-bottom:
+        1px solid
+        rgba(34, 211, 238, 0.07);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
 }
 
 
-/* ---------- Sidebar ---------- */
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
 
 section[data-testid="stSidebar"] {
     background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(34, 211, 238, 0.055),
+            transparent 17rem
+        ),
         linear-gradient(
             180deg,
-            #091525 0%,
-            #07111f 100%
+            #081522 0%,
+            #07111e 48%,
+            #050c17 100%
         );
 
     border-right:
-        1px solid rgba(148, 163, 184, 0.12);
+        1px solid
+        rgba(34, 211, 238, 0.10);
+
+    box-shadow:
+        8px 0 30px
+        rgba(0, 0, 0, 0.12);
 }
 
 
 section[data-testid="stSidebar"]
 div[data-testid="stSidebarContent"] {
-    padding-top: 1rem;
+    padding-top: 1.15rem;
+    padding-bottom: 1.5rem;
 }
 
 
-/* ---------- Typography ---------- */
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] label {
+    color:
+        var(--text-secondary);
+}
+
+
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3 {
+    color:
+        var(--text-primary);
+}
+
+
+section[data-testid="stSidebar"] hr {
+    border-color:
+        rgba(125, 211, 252, 0.08);
+}
+
+
+/* ============================================================
+   SIDEBAR NAVIGATION
+   ============================================================ */
+
+section[data-testid="stSidebar"]
+div[role="radiogroup"] {
+    gap:
+        0.2rem;
+}
+
+
+section[data-testid="stSidebar"]
+div[role="radiogroup"] label {
+    position:
+        relative;
+
+    min-height:
+        41px;
+
+    padding:
+        0.48rem
+        0.65rem;
+
+    border:
+        1px solid transparent;
+
+    border-radius:
+        var(--radius-md);
+
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+
+section[data-testid="stSidebar"]
+div[role="radiogroup"] label:hover {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(34, 211, 238, 0.06),
+            rgba(99, 102, 241, 0.035)
+        );
+
+    border-color:
+        rgba(125, 211, 252, 0.09);
+
+    transform:
+        translateX(2px);
+}
+
+
+section[data-testid="stSidebar"]
+div[role="radiogroup"] label:has(input:checked) {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(34, 211, 238, 0.14),
+            rgba(59, 130, 246, 0.09),
+            rgba(99, 102, 241, 0.055)
+        );
+
+    border-color:
+        rgba(34, 211, 238, 0.22);
+
+    box-shadow:
+        inset 3px 0 0
+        var(--cyan),
+        0 0 18px
+        rgba(34, 211, 238, 0.035);
+}
+
+
+section[data-testid="stSidebar"]
+div[role="radiogroup"]
+label:has(input:checked) p {
+    color:
+        #e7fbff;
+
+    font-weight:
+        680;
+}
+
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
 
 h1,
 h2,
-h3 {
-    letter-spacing: -0.025em;
+h3,
+h4,
+h5,
+h6 {
+    color:
+        var(--text-primary);
+
+    text-wrap:
+        balance;
+
+    letter-spacing:
+        -0.025em;
 }
+
 
 h1 {
-    font-weight: 750;
+    margin-bottom:
+        0.25rem;
+
+    font-size:
+        clamp(
+            2rem,
+            2.8vw,
+            2.75rem
+        );
+
+    font-weight:
+        770;
+
+    line-height:
+        1.08;
+
+    letter-spacing:
+        -0.045em;
 }
+
 
 h2 {
-    font-weight: 700;
+    font-weight:
+        720;
+
+    letter-spacing:
+        -0.035em;
 }
+
 
 h3 {
-    font-weight: 650;
+    font-weight:
+        680;
 }
 
 
-/* ---------- Dividers ---------- */
+p {
+    color:
+        var(--text-secondary);
+
+    line-height:
+        1.6;
+}
+
+
+/* ============================================================
+   CAPTIONS / EYEBROWS
+   ============================================================ */
+
+.stCaption,
+div[data-testid="stCaptionContainer"] {
+    color:
+        var(--text-muted);
+}
+
+
+div[data-testid="stCaptionContainer"] p {
+    color:
+        var(--text-muted);
+
+    line-height:
+        1.5;
+}
+
+
+/* ============================================================
+   LINKS
+   ============================================================ */
+
+a {
+    color:
+        var(--cyan-bright);
+
+    text-decoration-color:
+        rgba(103, 232, 249, 0.30);
+
+    text-underline-offset:
+        3px;
+
+    transition:
+        color var(--transition-fast),
+        text-decoration-color var(--transition-fast);
+}
+
+
+a:hover {
+    color:
+        #a5f3fc;
+
+    text-decoration-color:
+        rgba(165, 243, 252, 0.75);
+}
+
+
+/* ============================================================
+   DIVIDERS
+   ============================================================ */
 
 hr {
-    border-color: rgba(148, 163, 184, 0.12);
+    margin-top:
+        1.4rem;
+
+    margin-bottom:
+        1.4rem;
+
+    border:
+        0;
+
+    height:
+        1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(34, 211, 238, 0.13),
+            rgba(99, 102, 241, 0.10),
+            transparent
+        );
 }
 
 
-/* ---------- Metric cards ---------- */
+/* ============================================================
+   METRIC CARDS
+   ============================================================ */
 
 div[data-testid="stMetric"] {
+    position:
+        relative;
+
+    min-height:
+        116px;
+
+    padding:
+        1.05rem
+        1.1rem;
+
     background:
         linear-gradient(
             145deg,
-            rgba(15, 29, 48, 0.92),
-            rgba(10, 22, 38, 0.92)
+            rgba(15, 31, 50, 0.96),
+            rgba(8, 20, 35, 0.98)
         );
 
     border:
-        1px solid rgba(148, 163, 184, 0.13);
+        1px solid
+        rgba(125, 211, 252, 0.13);
 
-    border-radius: 16px;
-
-    padding:
-        1.15rem
-        1.2rem;
-
-    min-height: 120px;
+    border-radius:
+        var(--radius-lg);
 
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.14);
+        var(--shadow-card);
+
+    overflow:
+        hidden;
 
     transition:
-        transform 0.18s ease,
-        border-color 0.18s ease,
-        box-shadow 0.18s ease;
+        transform var(--transition-normal),
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal),
+        background var(--transition-normal);
+}
+
+
+/* Futuristic accent rail */
+
+div[data-testid="stMetric"]::before {
+    content: "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    height:
+        2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--blue),
+            var(--indigo),
+            transparent 82%
+        );
+
+    opacity:
+        0.72;
+}
+
+
+/* Very subtle accent bloom */
+
+div[data-testid="stMetric"]::after {
+    content: "";
+
+    position:
+        absolute;
+
+    width:
+        90px;
+
+    height:
+        90px;
+
+    top:
+        -55px;
+
+    right:
+        -35px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(34, 211, 238, 0.10);
+
+    filter:
+        blur(20px);
+
+    pointer-events:
+        none;
 }
 
 
 div[data-testid="stMetric"]:hover {
-    transform: translateY(-2px);
+    transform:
+        translateY(-3px);
 
     border-color:
-        rgba(96, 165, 250, 0.30);
+        rgba(34, 211, 238, 0.30);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18, 38, 60, 0.98),
+            rgba(9, 23, 40, 0.98)
+        );
 
     box-shadow:
-        0 14px 34px rgba(0, 0, 0, 0.20);
+        var(--shadow-hover),
+        0 0 25px
+        rgba(34, 211, 238, 0.045);
 }
 
 
 div[data-testid="stMetricLabel"] {
-    color: #8fa4bf;
-    font-size: 0.78rem;
-    font-weight: 650;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    margin-bottom:
+        0.5rem;
+}
+
+
+div[data-testid="stMetricLabel"] p {
+    color:
+        #8fa8c3;
+
+    font-size:
+        0.71rem;
+
+    font-weight:
+        720;
+
+    line-height:
+        1.35;
+
+    letter-spacing:
+        0.07em;
+
+    text-transform:
+        uppercase;
 }
 
 
 div[data-testid="stMetricValue"] {
-    color: #f8fbff;
-    font-weight: 750;
-    letter-spacing: -0.035em;
+    color:
+        #f7fbff;
+
+    font-size:
+        clamp(
+            1.45rem,
+            1.8vw,
+            1.85rem
+        );
+
+    font-weight:
+        770;
+
+    line-height:
+        1.15;
+
+    letter-spacing:
+        -0.045em;
+
+    text-shadow:
+        0 0 24px
+        rgba(103, 232, 249, 0.06);
 }
 
 
-/* ---------- Buttons ---------- */
+div[data-testid="stMetricDelta"] {
+    margin-top:
+        0.3rem;
+
+    font-weight:
+        650;
+}
+
+
+/* ============================================================
+   STANDARD BUTTONS
+   ============================================================ */
 
 div[data-testid="stButton"] button,
-div[data-testid="stDownloadButton"] button {
-    min-height: 42px;
+div[data-testid="stDownloadButton"] button,
+div[data-testid="stFormSubmitButton"] button {
+    min-height:
+        43px;
 
-    border-radius: 10px;
+    padding:
+        0.55rem
+        1rem;
 
     border:
-        1px solid rgba(148, 163, 184, 0.20);
+        1px solid
+        rgba(125, 211, 252, 0.20);
 
-    font-weight: 650;
+    border-radius:
+        var(--radius-md);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(18, 39, 62, 0.98),
+            rgba(13, 28, 47, 0.98)
+        );
+
+    color:
+        var(--text-primary);
+
+    font-size:
+        0.9rem;
+
+    font-weight:
+        660;
+
+    letter-spacing:
+        -0.005em;
+
+    box-shadow:
+        0 2px 5px
+        rgba(0, 0, 0, 0.18);
 
     transition:
-        all 0.18s ease;
+        transform var(--transition-fast),
+        border-color var(--transition-fast),
+        background var(--transition-fast),
+        box-shadow var(--transition-fast);
 }
 
 
 div[data-testid="stButton"] button:hover,
-div[data-testid="stDownloadButton"] button:hover {
-    transform: translateY(-1px);
+div[data-testid="stDownloadButton"] button:hover,
+div[data-testid="stFormSubmitButton"] button:hover {
+    transform:
+        translateY(-1px);
 
     border-color:
-        rgba(96, 165, 250, 0.60);
+        rgba(34, 211, 238, 0.50);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(20, 47, 72, 0.98),
+            rgba(17, 34, 58, 0.98)
+        );
+
+    box-shadow:
+        0 6px 18px
+        rgba(0, 0, 0, 0.20),
+        0 0 18px
+        rgba(34, 211, 238, 0.045);
 }
 
 
-/* ---------- Primary buttons ---------- */
+div[data-testid="stButton"] button:active,
+div[data-testid="stDownloadButton"] button:active,
+div[data-testid="stFormSubmitButton"] button:active {
+    transform:
+        translateY(0);
+}
+
+
+/* ============================================================
+   PRIMARY ACTION
+   ============================================================ */
 
 button[kind="primary"] {
+    background:
+        linear-gradient(
+            115deg,
+            #0891b2 0%,
+            #2563eb 52%,
+            #4f46e5 100%
+        ) !important;
+
+    border-color:
+        rgba(103, 232, 249, 0.55) !important;
+
+    color:
+        #ffffff !important;
+
     box-shadow:
-        0 8px 22px rgba(37, 99, 235, 0.20);
+        0 7px 20px
+        rgba(37, 99, 235, 0.22),
+        0 0 18px
+        rgba(34, 211, 238, 0.07) !important;
 }
 
 
-/* ---------- Inputs ---------- */
+button[kind="primary"]:hover {
+    background:
+        linear-gradient(
+            115deg,
+            #06a4c7 0%,
+            #3478f6 52%,
+            #5b55ed 100%
+        ) !important;
 
-div[data-baseweb="select"] > div,
+    border-color:
+        rgba(103, 232, 249, 0.80) !important;
+
+    box-shadow:
+        0 9px 25px
+        rgba(37, 99, 235, 0.28),
+        0 0 25px
+        rgba(34, 211, 238, 0.10) !important;
+}
+
+
+/* ============================================================
+   DOWNLOAD BUTTON
+   ============================================================ */
+
+div[data-testid="stDownloadButton"] button {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 145, 178, 0.16),
+            rgba(37, 99, 235, 0.12)
+        );
+
+    border-color:
+        rgba(34, 211, 238, 0.28);
+
+    color:
+        #dffaff;
+}
+
+
+div[data-testid="stDownloadButton"] button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 145, 178, 0.24),
+            rgba(37, 99, 235, 0.18)
+        );
+
+    border-color:
+        rgba(34, 211, 238, 0.55);
+}
+
+
+/* ============================================================
+   DISABLED BUTTONS
+   ============================================================ */
+
+button:disabled {
+    opacity:
+        0.42 !important;
+
+    cursor:
+        not-allowed !important;
+
+    transform:
+        none !important;
+
+    box-shadow:
+        none !important;
+}
+
+
+/* ============================================================
+   KEYBOARD FOCUS
+   ============================================================ */
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+    outline:
+        2px solid
+        rgba(34, 211, 238, 0.82);
+
+    outline-offset:
+        2px;
+}
+
+
+/* ============================================================
+   WIDGET LABELS
+   ============================================================ */
+
+div[data-testid="stWidgetLabel"] p {
+    color:
+        #b7c8da;
+
+    font-size:
+        0.82rem;
+
+    font-weight:
+        650;
+}
+
+
+/* ============================================================
+   TEXT / NUMBER INPUTS
+   ============================================================ */
+
 div[data-baseweb="input"] > div,
-div[data-baseweb="base-input"] {
-    border-radius: 10px;
+div[data-baseweb="base-input"],
+div[data-testid="stTextInput"] input,
+div[data-testid="stNumberInput"] input {
+    border-radius:
+        var(--radius-md);
 }
 
 
-/* ---------- Dataframe ---------- */
+div[data-testid="stTextInput"] input,
+div[data-testid="stNumberInput"] input {
+    color:
+        var(--text-primary);
 
-div[data-testid="stDataFrame"] {
+    background:
+        rgba(9, 23, 39, 0.95);
+
+    border-color:
+        rgba(125, 211, 252, 0.14);
+
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+
+div[data-testid="stTextInput"] input:hover,
+div[data-testid="stNumberInput"] input:hover {
+    border-color:
+        rgba(125, 211, 252, 0.25);
+}
+
+
+div[data-testid="stTextInput"] input:focus,
+div[data-testid="stNumberInput"] input:focus {
+    border-color:
+        rgba(34, 211, 238, 0.55);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(34, 211, 238, 0.08);
+}
+
+
+/* ============================================================
+   TEXTAREA
+   ============================================================ */
+
+textarea {
+    background:
+        rgba(9, 23, 39, 0.95) !important;
+
+    color:
+        var(--text-primary) !important;
+
+    border-radius:
+        var(--radius-md) !important;
+
+    border-color:
+        rgba(125, 211, 252, 0.14) !important;
+}
+
+
+textarea:focus {
+    border-color:
+        rgba(34, 211, 238, 0.55) !important;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(34, 211, 238, 0.08) !important;
+}
+
+
+/* ============================================================
+   SELECT / MULTISELECT
+   ============================================================ */
+
+div[data-baseweb="select"] > div {
+    min-height:
+        42px;
+
+    background:
+        rgba(9, 23, 39, 0.95);
+
+    border-color:
+        rgba(125, 211, 252, 0.14);
+
+    border-radius:
+        var(--radius-md);
+
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+
+div[data-baseweb="select"] > div:hover {
+    border-color:
+        rgba(34, 211, 238, 0.32);
+}
+
+
+/* ============================================================
+   CHECKBOX / TOGGLE / RADIO
+   ============================================================ */
+
+div[data-testid="stCheckbox"] label,
+div[data-testid="stToggle"] label,
+div[data-testid="stRadio"] label {
+    color:
+        var(--text-secondary);
+}
+
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+
+div[data-testid="stForm"] {
+    position:
+        relative;
+
+    padding:
+        1.2rem;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12, 28, 46, 0.78),
+            rgba(8, 19, 34, 0.82)
+        );
+
     border:
-        1px solid rgba(148, 163, 184, 0.12);
+        1px solid
+        rgba(125, 211, 252, 0.13);
 
-    border-radius: 14px;
+    border-radius:
+        var(--radius-lg);
 
-    overflow: hidden;
+    box-shadow:
+        var(--shadow-card);
 }
 
 
-/* ---------- Expander ---------- */
+/* ============================================================
+   DATAFRAME / TABLE
+   ============================================================ */
+
+div[data-testid="stDataFrame"],
+div[data-testid="stTable"] {
+    border:
+        1px solid
+        rgba(125, 211, 252, 0.12);
+
+    border-radius:
+        var(--radius-lg);
+
+    overflow:
+        hidden;
+
+    background:
+        rgba(7, 19, 33, 0.84);
+
+    box-shadow:
+        0 4px 18px
+        rgba(0, 0, 0, 0.12);
+}
+
+
+/* ============================================================
+   PLOTLY CHART CONTAINERS
+   ============================================================ */
+
+div[data-testid="stPlotlyChart"] {
+    position:
+        relative;
+
+    padding:
+        0.4rem;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12, 29, 48, 0.83),
+            rgba(7, 18, 32, 0.90)
+        );
+
+    border:
+        1px solid
+        rgba(125, 211, 252, 0.11);
+
+    border-radius:
+        var(--radius-lg);
+
+    box-shadow:
+        0 6px 22px
+        rgba(0, 0, 0, 0.12);
+
+    overflow:
+        hidden;
+
+    transition:
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal),
+        transform var(--transition-normal);
+}
+
+
+div[data-testid="stPlotlyChart"]::before {
+    content: "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        8%;
+
+    right:
+        8%;
+
+    height:
+        1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(34, 211, 238, 0.24),
+            rgba(99, 102, 241, 0.16),
+            transparent
+        );
+
+    pointer-events:
+        none;
+}
+
+
+div[data-testid="stPlotlyChart"]:hover {
+    border-color:
+        rgba(34, 211, 238, 0.20);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 0, 0, 0.16);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ============================================================
+   ALERTS
+   ============================================================ */
+
+div[data-testid="stAlert"] {
+    border-radius:
+        var(--radius-md);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.14);
+
+    backdrop-filter:
+        blur(8px);
+}
+
+
+div[data-testid="stAlert"] p {
+    line-height:
+        1.5;
+}
+
+
+/* ============================================================
+   EXPANDERS
+   ============================================================ */
 
 details[data-testid="stExpander"] {
     background:
-        rgba(15, 29, 48, 0.55);
+        linear-gradient(
+            145deg,
+            rgba(12, 29, 48, 0.72),
+            rgba(8, 20, 35, 0.76)
+        );
 
     border:
-        1px solid rgba(148, 163, 184, 0.12);
+        1px solid
+        rgba(125, 211, 252, 0.12);
 
-    border-radius: 12px;
+    border-radius:
+        var(--radius-md);
+
+    overflow:
+        hidden;
+
+    transition:
+        border-color var(--transition-fast),
+        background var(--transition-fast);
 }
 
 
-/* ---------- Alerts ---------- */
-
-div[data-testid="stAlert"] {
-    border-radius: 12px;
+details[data-testid="stExpander"]:hover {
+    border-color:
+        rgba(34, 211, 238, 0.24);
 }
 
 
-/* ---------- Tabs ---------- */
+details[data-testid="stExpander"][open] {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(14, 34, 55, 0.84),
+            rgba(9, 22, 39, 0.88)
+        );
+
+    border-color:
+        rgba(34, 211, 238, 0.24);
+}
+
+
+/* ============================================================
+   TABS
+   ============================================================ */
+
+div[data-baseweb="tab-list"] {
+    gap:
+        0.25rem;
+
+    border-bottom:
+        1px solid
+        rgba(125, 211, 252, 0.10);
+}
+
 
 button[data-baseweb="tab"] {
-    font-weight: 650;
+    min-height:
+        42px;
+
+    padding-left:
+        0.9rem;
+
+    padding-right:
+        0.9rem;
+
+    color:
+        var(--text-muted);
+
+    font-weight:
+        650;
+
+    border-radius:
+        var(--radius-sm)
+        var(--radius-sm)
+        0
+        0;
+
+    transition:
+        color var(--transition-fast),
+        background var(--transition-fast);
 }
 
 
-/* ---------- Plotly ---------- */
+button[data-baseweb="tab"]:hover {
+    color:
+        #dffaff;
 
-div[data-testid="stPlotlyChart"] {
     background:
-        rgba(10, 22, 38, 0.48);
-
-    border:
-        1px solid rgba(148, 163, 184, 0.10);
-
-    border-radius: 16px;
-
-    padding: 0.4rem;
+        rgba(34, 211, 238, 0.045);
 }
 
 
-/* ---------- Progress ---------- */
+button[data-baseweb="tab"][aria-selected="true"] {
+    color:
+        var(--cyan-bright);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(34, 211, 238, 0.07),
+            transparent
+        );
+}
+
+
+/* ============================================================
+   PROGRESS
+   ============================================================ */
+
+div[data-testid="stProgress"] > div {
+    background:
+        rgba(125, 211, 252, 0.10);
+
+    border-radius:
+        999px;
+}
+
 
 div[data-testid="stProgress"] > div > div {
-    border-radius: 100px;
+    border-radius:
+        999px;
+
+    box-shadow:
+        0 0 10px
+        rgba(34, 211, 238, 0.20);
 }
 
 
-/* ---------- Caption ---------- */
+/* ============================================================
+   SPINNER
+   ============================================================ */
 
-.stCaption {
-    color: #7f93ad;
+div[data-testid="stSpinner"] {
+    color:
+        var(--cyan-bright);
 }
 
 
-/* ---------- Sidebar radio ---------- */
+/* ============================================================
+   POPOVERS / MENUS
+   ============================================================ */
 
-section[data-testid="stSidebar"]
-div[role="radiogroup"] label {
-    border-radius: 9px;
-    padding: 0.35rem 0.45rem;
+div[data-baseweb="popover"],
+div[data-baseweb="menu"] {
+    border-radius:
+        var(--radius-md);
 }
 
 
-/* ---------- Scrollbar ---------- */
+/* ============================================================
+   CODE
+   ============================================================ */
+
+code {
+    padding:
+        0.12rem
+        0.36rem;
+
+    background:
+        rgba(34, 211, 238, 0.065);
+
+    border:
+        1px solid
+        rgba(34, 211, 238, 0.10);
+
+    border-radius:
+        5px;
+
+    color:
+        #a5f3fc;
+}
+
+
+/* ============================================================
+   TOOLTIP
+   ============================================================ */
+
+div[role="tooltip"] {
+    border-radius:
+        var(--radius-sm);
+}
+
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
 
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width:
+        9px;
+
+    height:
+        9px;
 }
+
 
 ::-webkit-scrollbar-track {
-    background: #07111f;
+    background:
+        #050b16;
 }
+
 
 ::-webkit-scrollbar-thumb {
-    background: #263b55;
-    border-radius: 10px;
+    background:
+        linear-gradient(
+            180deg,
+            #1d4258,
+            #293b63
+        );
+
+    border:
+        2px solid
+        #050b16;
+
+    border-radius:
+        999px;
 }
+
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #355171;
+    background:
+        linear-gradient(
+            180deg,
+            #256078,
+            #3d4f85
+        );
 }
 
 
-/* ---------- Mobile ---------- */
+* {
+    scrollbar-width:
+        thin;
 
-@media (max-width: 900px) {
+    scrollbar-color:
+        #28475f
+        #050b16;
+}
+
+
+/* ============================================================
+   TEXT SELECTION
+   ============================================================ */
+
+::selection {
+    background:
+        rgba(34, 211, 238, 0.24);
+
+    color:
+        #ffffff;
+}
+
+
+/* ============================================================
+   RESPONSIVE — TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) {
 
     .block-container {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left:
+            1.4rem;
+
+        padding-right:
+            1.4rem;
     }
 
+
     div[data-testid="stMetric"] {
-        min-height: 105px;
+        min-height:
+            108px;
+
+        padding:
+            0.95rem;
+    }
+
+
+    div[data-testid="stMetricValue"] {
+        font-size:
+            1.45rem;
+    }
+}
+
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    [data-testid="stAppViewContainer"]::before {
+        opacity:
+            0.08;
+
+        background-size:
+            36px 36px;
+    }
+
+
+    .block-container {
+        padding-top:
+            1rem;
+
+        padding-left:
+            0.9rem;
+
+        padding-right:
+            0.9rem;
+
+        padding-bottom:
+            3rem;
+    }
+
+
+    h1 {
+        font-size:
+            1.85rem;
+    }
+
+
+    h2 {
+        font-size:
+            1.35rem;
+    }
+
+
+    h3 {
+        font-size:
+            1.12rem;
+    }
+
+
+    div[data-testid="stMetric"] {
+        min-height:
+            98px;
+
+        border-radius:
+            12px;
+    }
+
+
+    div[data-testid="stPlotlyChart"],
+    div[data-testid="stDataFrame"],
+    div[data-testid="stTable"] {
+        border-radius:
+            12px;
+    }
+
+
+    div[data-testid="stButton"] button,
+    div[data-testid="stDownloadButton"] button,
+    div[data-testid="stFormSubmitButton"] button {
+        min-height:
+            44px;
+    }
+}
+
+
+/* ============================================================
+   ACCESSIBILITY — REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
     }
 }

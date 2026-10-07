@@ -7,7 +7,10 @@ from typing import Any
 
 from sqlalchemy import text
 
-from src.config import BASE_DIR
+from src.config import (
+    BASE_DIR,
+    IS_CLOUD,
+)
 from src.customer_generator import (
     generate_and_persist_customer,
 )
@@ -54,9 +57,14 @@ def set_generation_interval(
 ) -> None:
     """Persist the requested generation interval."""
 
-    seconds = float(seconds)
+    seconds = float(
+        seconds
+    )
 
-    if seconds < MINIMUM_INTERVAL_SECONDS:
+    if (
+        seconds
+        < MINIMUM_INTERVAL_SECONDS
+    ):
         raise ValueError(
             "Generation interval must be at least "
             f"{MINIMUM_INTERVAL_SECONDS} seconds."
@@ -92,7 +100,7 @@ def mark_engine_started(
     """
     Atomically transition the engine from stopped to running.
 
-    Returns False when another worker is already marked running.
+    Returns False when the engine is already marked running.
     """
 
     interval_seconds = float(
@@ -181,7 +189,10 @@ def request_engine_stop() -> bool:
     """
     Request a graceful stop.
 
-    The worker will observe is_running=False and exit.
+    Local workers exit after observing the flag.
+
+    Cloud workers remain online and wait for the next
+    START request.
     """
 
     engine = get_engine()
@@ -233,11 +244,14 @@ def request_engine_stop() -> bool:
 
 def reset_stale_engine_state() -> None:
     """
-    Recover from an interrupted worker.
+    Recover from an interrupted local worker.
 
-    This is useful if the computer or worker process was
-    terminated while is_running remained TRUE.
+    Cloud deployments use a persistent worker service,
+    therefore startup does not reset cloud engine state.
     """
+
+    if IS_CLOUD:
+        return
 
     engine = get_engine()
 
@@ -271,11 +285,19 @@ def reset_stale_engine_state() -> None:
 
 def launch_worker_process() -> None:
     """
-    Launch the generator worker as a detached process.
+    Launch the local generator worker as a detached process.
 
-    stdout/stderr are detached so the Streamlit process
-    does not block waiting for the worker.
+    Cloud deployment uses a dedicated background-worker
+    service and therefore never launches a subprocess from
+    Streamlit.
     """
+
+    if IS_CLOUD:
+
+        raise RuntimeError(
+            "Detached worker launch is disabled "
+            "in cloud mode."
+        )
 
     creation_flags = 0
 
@@ -306,7 +328,16 @@ def launch_worker_process() -> None:
 def start_engine(
     interval_seconds: float = 2.0,
 ) -> bool:
-    """Start the continuous generation engine."""
+    """
+    Start customer generation.
+
+    Local:
+        mark running + launch detached subprocess.
+
+    Cloud:
+        mark running only. The persistent Render worker
+        observes the PostgreSQL state automatically.
+    """
 
     reset_stale_engine_state()
 
@@ -316,6 +347,9 @@ def start_engine(
 
     if not started:
         return False
+
+    if IS_CLOUD:
+        return True
 
     try:
 
@@ -330,7 +364,7 @@ def start_engine(
 
 
 def stop_engine() -> bool:
-    """Request graceful worker shutdown."""
+    """Request generation shutdown/pause."""
 
     return request_engine_stop()
 
